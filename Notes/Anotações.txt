@@ -7,3 +7,10 @@ e no Arquivo que eu for usar, colocar {} no nome
 import {Nome da function} from './'
 
 Usar sem o default é para usar o mesmo nome da function em todos os arquivos (Melhor)
+
+
+>>>>>>> Styled Components <<<<<<<<<
+Usando js para dar estilização na pagina
+CSS com js
+
+Para fazer uma estilização precisamos colocar como uma const 
