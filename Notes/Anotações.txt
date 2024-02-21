@@ -14,3 +14,27 @@ Usando js para dar estilização na pagina
 CSS com js
 
 Para fazer uma estilização precisamos colocar como uma const 
+
+
+>>>>>>>> ARROW function <<<<<<<<<<
+
+Não tem nome e tbm não tem o function
+
+passa direto para o const
+
+const result = (7,3) =>{
+    result a+b;
+}
+Como ela não tem nome
+É uma função que será executada ali, aquele lugar
+
+body{
+    background-color: ${({theme}) => theme.COLORS.BACKGROUND_800};
+    Estou desestruturando o theme e chamando de theme a cor do background é que 800
+    Então estou executando essa função apenas aqui
+}
+Eu poderia como assim 
+${( props ) => props.theme.COLORS.BACKGROUND_800}; // Estou acessando as propriedades e pegando o theme
+${({theme}) => theme.COLORS.BACKGROUND_800} // Estou desestruturando o props e pegando direto o theme. 
+Quando eu colo o { theme } eu estou pulando o props e indo direto para o theme
+

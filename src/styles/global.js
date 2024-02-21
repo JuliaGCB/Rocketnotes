@@ -10,6 +10,14 @@ export default createGlobalStyle`
     body{
         background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800}; // Puxando do meu arquivo de cores globais
         color: ${({ theme }) => theme.COLORS.WHITE};
+
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body, input, button, textarea{
+        font-family: "Roboto Slab", serif;
+        font-size: 16px;
+        outline: none;
     }
 
     a{
