@@ -38,3 +38,6 @@ ${( props ) => props.theme.COLORS.BACKGROUND_800}; // Estou acessando as proprie
 ${({theme}) => theme.COLORS.BACKGROUND_800} // Estou desestruturando o props e pegando direto o theme. 
 Quando eu colo o { theme } eu estou pulando o props e indo direto para o theme
 
+>>>>> Propriedade Children <<<<<<<<<
+Não se passa como uma propriedade normal
+e pode ser mudada em outras paginas
