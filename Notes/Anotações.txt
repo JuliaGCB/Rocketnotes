@@ -41,3 +41,8 @@ Quando eu colo o { theme } eu estou pulando o props e indo direto para o theme
 >>>>> Propriedade Children <<<<<<<<<
 Não se passa como uma propriedade normal
 e pode ser mudada em outras paginas
+
+>>>> isActive <<<<<<<
+è para saber se aquela coisa está ativa ou não e é uma boolean (true/false)
+
+icon: Icon usando para fazer uma conversão nos paramentos para o icon poder ser um componente com Icon
