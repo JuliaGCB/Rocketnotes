@@ -46,3 +46,10 @@ e pode ser mudada em outras paginas
 è para saber se aquela coisa está ativa ou não e é uma boolean (true/false)
 
 icon: Icon usando para fazer uma conversão nos paramentos para o icon poder ser um componente com Icon
+
+
+
+
+>>>>> MAP <<<<<<
+usado para percerrer uma lista
+item po item
