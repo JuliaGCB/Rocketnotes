@@ -53,3 +53,9 @@ icon: Icon usando para fazer uma conversão nos paramentos para o icon poder ser
 >>>>> MAP <<<<<<
 usado para percerrer uma lista
 item po item
+
+
+>>>>>>> NoteItem <<<<<<
+
+readOnly={!isNew} fica apenas para leitura
+para bloquar quando não for uma coisa nova
