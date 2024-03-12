@@ -1,9 +1,15 @@
 import { Container, Form, Background } from './style';
+
+import { Link } from 'react-router-dom';
+
 import {Input} from '../../components/Input';
 import {Button} from '../../components/Button';
 
 import {FiMail, FiLock } from 'react-icons/fi';
-
+/**
+ * <Link/> do react dom não vai mudar em nada a principio mas ele já facilita para fazer a navegaçção entre as paginas
+ * è com esse link que eu vou voltar para o login e ir para criar conta
+ */
 export function SignIn(){
     return(
         <Container>
@@ -25,7 +31,9 @@ export function SignIn(){
                 />
                 <Button title="Entrar" />
 
-                <a href="#">Criar conta</a>                
+                <Link to="/register">
+                    Criar conta
+                </Link>                
             </Form>
             <Background/>
         </Container>

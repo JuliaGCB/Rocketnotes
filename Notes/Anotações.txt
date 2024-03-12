@@ -1,3 +1,14 @@
+COmandos 
+npm run dev -- iniciar a aplicação
+npm create vite@lastest -- colocar o vite na aplicação
+npm init -y --
+npm install -- coloca a pasta node modules
+npm install styled-components -- colocar o styled-components na aplicação
+npm install react-icons --save -- Colocar os icones do react
+
+npm install 
+npm install react-router-dom -- instala o react router para criar as rotas
+
 >>>>>> Coisas básicas<<<<<<
 Para importar algum arquivo ou função usar 
 export function (nome da function)(){
