@@ -70,3 +70,7 @@ item po item
 
 readOnly={!isNew} fica apenas para leitura
 para bloquar quando não for uma coisa nova
+
+
+>>>>>>> useState <<<<<<<
+um hook que cria um estado
