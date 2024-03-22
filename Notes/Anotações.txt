@@ -8,6 +8,7 @@ npm install react-icons --save -- Colocar os icones do react
 
 npm install 
 npm install react-router-dom -- instala o react router para criar as rotas
+npm install axios : uma biblioteca para trabalhar com requisições http
 
 >>>>>> Coisas básicas<<<<<<
 Para importar algum arquivo ou função usar 
@@ -59,8 +60,6 @@ e pode ser mudada em outras paginas
 icon: Icon usando para fazer uma conversão nos paramentos para o icon poder ser um componente com Icon
 
 
-
-
 >>>>> MAP <<<<<<
 usado para percerrer uma lista
 item po item
@@ -72,5 +71,22 @@ readOnly={!isNew} fica apenas para leitura
 para bloquar quando não for uma coisa nova
 
 
->>>>>>> useState <<<<<<<
-um hook que cria um estado
+>>>>> Contexto <<<<<<
+è para fazer uma autenticação dos usuarios e a pagina que ira mostrar para os usuarios
+se tiver autenticado mostrar a pagina home e as demais paginas
+se não mostar o login
+
+O contexto vai guardar as minhas rotas de auth.routes.js e app.routes.js
+e eu compartilho esse contexto com as o <Routes/> para que todas as rotas tenham acesso ao contexto
+
+
+>>>>> Hooks <<<<<<
+useState => criar e acessar estados
+    > useState
+        um hook que cria um estado
+e o 
+useEffect => disparar uma logica toda vez que a interface for redenrizada // vincular um estado 
+
+sempre o antes do nome do hook colocar o use
+useNomeDoHook  => camelCase
+

@@ -1,16 +1,21 @@
-import { Container, Form, Background } from './style';
-
+import {FiMail, FiLock } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+
+import { useAuth } from '../../hooks/auth';
 
 import {Input} from '../../components/Input';
 import {Button} from '../../components/Button';
 
-import {FiMail, FiLock } from 'react-icons/fi';
+import { Container, Form, Background } from './style';
 /**
  * <Link/> do react dom não vai mudar em nada a principio mas ele já facilita para fazer a navegaçção entre as paginas
  * è com esse link que eu vou voltar para o login e ir para criar conta
  */
 export function SignIn(){
+
+    const data = useAuth();
+    console.log("Meu contexto => ", data);
+
     return(
         <Container>
             <Form>
