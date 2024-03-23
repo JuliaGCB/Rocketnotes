@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import { useAuth } from "../hooks/auth"
 
 import { AppRoutes } from "./app.routes";
 import { AuthRoutes } from "./auth.routes";
@@ -9,12 +10,17 @@ import { AuthRoutes } from "./auth.routes";
  * 
  * Criar a navegação
  * 
+ * 
+ * {user ? <AppRoutes/> : <AuthRoutes/>} // se existe conteudo no user mostrar AppRoutes se não mostrar AuthRoutes
  */
 
 export function Routes(){
+    const { user } = useAuth();
+
+
     return(
         <BrowserRouter>
-            <AuthRoutes/>
+            {user ? <AppRoutes/> : <AuthRoutes/>}
         </BrowserRouter>
     )
 }
