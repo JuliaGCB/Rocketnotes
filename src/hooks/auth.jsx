@@ -36,6 +36,31 @@ function AuthProvider({ children }) {
         
     }
 
+    function signOut(){ //Removendo os dados do localStorage e fazendo o usuario voltar para a pagina de login, essa função foi colocada no Header
+        localStorage.removeItem("@rocketnotes:token");
+        localStorage.removeItem("@rocketnotes:user");
+
+        setData({});
+    }
+
+    async function updateProfile({user}){
+        try {
+
+            await api.put("/users", user);
+            localStorage.setItem("@rocketnotes:user", JSON.stringify(user));
+
+            setData({ user, token: data.token });
+            alert("Atualizado com sucesso")
+
+        } catch(error) {
+            if(error.response){
+                alert(error.response.data.message);
+            }else{
+                alert("Não foi possivel atualizar o perfil");
+            }
+        }
+    }
+
     useEffect(() => {
         const token = localStorage.getItem("@rocketnotes:token");
         const user = localStorage.getItem("@rocketnotes:user");
@@ -52,7 +77,13 @@ function AuthProvider({ children }) {
 
 
     return(
-        <AuthContext.Provider value={{ signIn, user: data.user }}> 
+        <AuthContext.Provider value={{ 
+            signIn, 
+            signOut,
+            user: data.user,
+            updateProfile
+        }}
+        > 
             {children} 
         </AuthContext.Provider>
     )

@@ -90,3 +90,48 @@ useEffect => disparar uma logica toda vez que a interface for redenrizada // vin
 sempre o antes do nome do hook colocar o use
 useNomeDoHook  => camelCase
 
+>>>> useEffect <<<<
+Você diz aoo react  que o componente precisa fazer algo depois da renderização. Isto é, depois que realizar as atualizações do DOM.
+
+Porque é chamado dentro de um componente?
+Colocando useEffect dentro do componente nos permite acessar os estados do componente.
+
+
+>>>>> Renderização <<<<<<
+
+    > Render
+        - Antes dos seus componentes serem exibidos na tela eles devem ser renderizados pelo react
+    
+
+    Etapa 1 - Acionar = garçom vai pegar o pedido do cliente
+        Há duas razões para um componente rederizar
+        1 - Quando é a renderização incial do componente
+            Quando o seu aplicativo é iniciado a renderização inicial é acionada
+
+        2 - O estado do componente mudou
+            A atualização do estado do componetente enfileira automaticamente uma renderização. Você pode imaginar o cliente do restaurante pedindo mais Coisas
+
+        > Re-renderização quando o estado é atualizado
+            -> Atualização do estado -> Gatinho -> Renderizar
+
+
+    Etapa 2 - React rendiza seus componentes
+        • Depois de acionar uma renderização o React chama seus componentes para descobrir o que exibir na tela
+            O Rendering é o React chamando seus componentes
+
+        • Na renderização inicial, o React chamará o componente raiz
+        • Para renderização o Reacr chamará o componente de função cuja atualização de estado acionou a renderização
+
+        Esse processo é recursivo. O componente também pode disparar um gatilho para renderizar algo em seguida, e assim por diante.
+        O processo continuará até que o não haja mais componentes aninhados e o React saiba exatamente o que deve ser exibido na tela.
+
+
+    Etapa 3 - React confimar as alterações na DOM.
+        Após renderizar(chamar) seus componentes, o React modificará o DOM.
+
+        Para a renderização inicial o React usará a API DOm para colocar todos os nós DOM criados na tela.
+
+        Para re-renderizar o React aplicara as operações minimas necessarias (calculadas durante a renderização)
+        para fazer o DOM corresponder à saída de renderizção mais recente.
+
+        Vai renderizar apenas o que for necessarios e fica mais rapido - React

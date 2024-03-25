@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 
-import {New} from '../pages/New';
-import {Home} from '../pages/Home';
-import {Details} from '../pages/Details';
-import {Profile} from '../pages/Profile';
+import { New } from '../pages/New';
+import { Home } from '../pages/Home';
+import { Details } from '../pages/Details';
+import { Profile } from '../pages/Profile';
 /**
  * Essa pagina é das minhas rotas que vao para essas paginas aqui em baixo
  * o react routes acha as paginas de acordo com os imports e tbm com os componentes ex: <Home />
