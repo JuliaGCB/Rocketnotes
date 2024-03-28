@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {Header} from '../../components/Header';
 import { Link } from 'react-router-dom';
 import {Input } from '../../components/Input';
@@ -11,6 +13,19 @@ import { Container, Form } from './style';
 
 
 export function New(){
+
+    const [links, setLinks] = useState([]); //Atualizando os links
+    const [newLink, setNewLink] = useState(""); //estados dos links
+
+    function handleAddLink(){
+        setLinks(prevState => [...prevState, newLink]); //prevState eu acesso oq tinha antes e depois eu monto um novo array com o novo link
+        setNewLink("");
+    }
+
+    function handleRemoveLink(deleted){ //deletando o link
+        setLinks(prevState => prevState.filter(link => link !== deleted))
+    }
+
     return(
         <Container>
             <Header/>
@@ -26,8 +41,22 @@ export function New(){
                     <Textarea placeholder="Observações" />
 
                     <Section title="Links úteis">
-                        <NoteItem value="https://rocketseat.com.br" />
-                        <NoteItem $isNew placeholder="Novo Link" />
+                        {
+                            links.map((link, index) => ( //Mosntrando os links que forem adicionados
+                                <NoteItem 
+                                    key={String(index)}
+                                    value={link}
+                                    onClick={() => handleRemoveLink(link)}
+                                />
+                            ))
+                        }
+                        <NoteItem  //criando os link novos
+                            $isNew
+                            placeholder="Novo Link" 
+                            value={newLink}
+                            onChange = {e => setNewLink(e.target.value)}
+                            onClick={handleAddLink}
+                        />
                     </Section> 
 
                     <Section title="Marcadores">   

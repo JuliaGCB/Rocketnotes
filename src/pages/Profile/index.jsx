@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from "../../hooks/auth"
 
+import {api} from "../../services/api";
+
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg"
+
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
@@ -17,6 +21,10 @@ export function Profile(){
     const [passwordOld, setPasswordOld] = useState();
     const [passwordNew, setPasswordNew] = useState();
 
+    const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
+    const [avatar, setAvatar] = useState(avatarUrl); //se o user já tiver um avatar
+    const [avatarFile, setAvatarFile] = useState(null); //usando o avatarFile para carregar a imagem
+
     async function handleUpdate(){
         const user ={
             name,
@@ -26,7 +34,15 @@ export function Profile(){
 
         }
 
-        await updateProfile({user})
+        await updateProfile({user, avatarFile})
+    }
+
+    function handleChangeAvatar(event) { //Fazendo a alteração do avatar
+        const file = event.target.files[0]; 
+        setAvatarFile(file);
+
+        const imagemPreview = URL.createObjectURL(file);
+        setAvatar(imagemPreview);
     }
 
     return(
@@ -40,7 +56,7 @@ export function Profile(){
             <Form>
                 <Avatar>
                     <img 
-                        src="https://github.com/JuliaGCB.png" 
+                        src={avatar}
                         alt="Foto do usuário" 
                     />
                     <label htmlFor="avatar">
@@ -49,6 +65,7 @@ export function Profile(){
                         <input 
                             id='avatar'
                             type='file'
+                            onChange={handleChangeAvatar}
                         />
                     </label>
                 </Avatar>
@@ -78,7 +95,7 @@ export function Profile(){
                     icon = {FiLock}
                     onChange = {e => setPasswordNew(e.target.value)}
                 />
-                <Button title="Salvar" onClick ={updateProfile}/>
+                <Button title="Salvar" onClick ={handleUpdate}/>
             </Form>
         </Container>
     );
