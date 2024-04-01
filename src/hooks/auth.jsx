@@ -20,8 +20,8 @@ function AuthProvider({ children }) {
             const response = await api.post("/sessions", { email, password });
             const { user, token } = response.data; //deixando separado os dados do usuario e o token
 
-            localStorage.getItem("@rocketnotes:user", JSON.stringify(user)); //gaurdando o usuario e transformanto em string
-            localStorage.getItem("@rocketnotes:token", token);
+            localStorage.setItem("@rocketnotes:user", JSON.stringify(user)); //gaurdando o usuario e transformanto em string
+            localStorage.setItem("@rocketnotes:token", token);
 
             api.defaults.headers.common["Authorization"] = `Bearer ${token}` //inserindo um token do tipo Bearer de autorização no header por padrão de todas as requisisões
             setData({user, token});
