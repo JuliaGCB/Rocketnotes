@@ -17,6 +17,10 @@ export function New(){
     const [links, setLinks] = useState([]); //Atualizando os links
     const [newLink, setNewLink] = useState(""); //estados dos links
 
+    const [tags, setTags] = useState([]); //estados dos links
+    const [newTag, setNewTag] = useState(""); //Atualizando os links
+
+
     function handleAddLink(){
         setLinks(prevState => [...prevState, newLink]); //prevState eu acesso oq tinha antes e depois eu monto um novo array com o novo link
         setNewLink("");
@@ -24,6 +28,10 @@ export function New(){
 
     function handleRemoveLink(deleted){ //deletando o link
         setLinks(prevState => prevState.filter(link => link !== deleted))
+    }
+
+    function handleAddTag(){
+        setTags(prevState => [...prevState, newTag]); //Adicionando as tags ou marcadores
     }
 
     return(
