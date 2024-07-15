@@ -26,8 +26,6 @@ export function Home() {
     } else {
       setTagsSelected((prevState) => [...prevState, tagName]);
     }
-
-    console.log(alreadySelected);
     setTagsSelected((prevState) => [...prevState, tagName]); //Dessa forma consigo selecionar varias tag sem perder a cor delas
   }
 
@@ -81,7 +79,7 @@ export function Home() {
       <Search>
         <Input
           placeholder="Pesquisar pelo título"
-          onchange={() => setSearch(e.target.value)}
+          onchange={(e) => setSearch(e.target.value)}
         />
       </Search>
 
