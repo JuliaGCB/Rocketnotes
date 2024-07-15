@@ -1,98 +1,105 @@
-import { useState, useEffect } from 'react';
-import { FiPlus } from 'react-icons/fi';
+import { useState, useEffect } from "react";
+import { FiPlus } from "react-icons/fi";
 
 import { api } from "../../services/api";
 
-import { Container, Brand, Menu, Search, Content, NewNote } from './style';
+import { Container, Brand, Menu, Search, Content, NewNote } from "./style";
 
-import { Header } from '../../components/Header';
-import { Note } from '../../components/Note';
-import { Input } from '../../components/Input';
-import { Section } from '../../components/Section';
-import { ButtonText } from '../../components/ButtonText';
+import { Header } from "../../components/Header";
+import { Note } from "../../components/Note";
+import { Input } from "../../components/Input";
+import { Section } from "../../components/Section";
+import { ButtonText } from "../../components/ButtonText";
 
-export function Home (){
+export function Home() {
+  const [tags, setTags] = useState([]);
+  const [tagsSelected, setTagsSelected] = useState([]);
+  const [search, setSearch] = useState("");
+  const [notes, setNotes] = useState([]);
 
-    const [tags, setTags] = useState([]);
-    const [tagsSelected, setTagsSelected] = useState([]);
+  function handleTagSelected(tagName) {
+    const alreadySelected = tagsSelected.includes(tagName); //Verificando se o TagName existe na list de tag
 
-    function handleTagSelected(tagName){
-        const alreadySelected = tagsSelected.includes(tagName); //Verificando se o TagName existe na list de tag
-        
-        if(alreadySelected){
-            const filteredTags = tagsSelected.filter(tag => tag !== tagName);
-            setTagsSelected(filteredTags);
-            
-
-        }else{
-            setTagsSelected(prevState => [...prevState, tagName]);
-        }
-
-        console.log(alreadySelected);
-        setTagsSelected(prevState =>[...prevState, tagName]); //Dessa forma consigo selecionar varias tag sem perder a cor delas
+    if (alreadySelected) {
+      const filteredTags = tagsSelected.filter((tag) => tag !== tagName);
+      setTagsSelected(filteredTags);
+    } else {
+      setTagsSelected((prevState) => [...prevState, tagName]);
     }
 
+    console.log(alreadySelected);
+    setTagsSelected((prevState) => [...prevState, tagName]); //Dessa forma consigo selecionar varias tag sem perder a cor delas
+  }
 
-    useEffect(() =>{
-        async function fetchTags() {
-            const response = await api.get("/tags");
-            setTags(response.data);
-        }
+  useEffect(() => {
+    async function fetchTags() {
+      const response = await api.get("/tags");
+      setTags(response.data);
+    }
 
+    fetchTags();
+  }, []);
 
-        fetchTags();
-    }, []);
+  useEffect(() => {
+      async function fetchNotes() {
+      const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`
+      );
+      setNotes(response.data);
+    }
 
-    return(
-        <Container>
-            <Brand>
-                <h1>Rocketnotes</h1>
-            </Brand>
+    fetchNotes();
+  }, [tagsSelected, search]); //Vai ser executado novamente caso o usuário clique em uma tag e tbm a pesquisa
 
-            <Header />
+  return (
+    <Container>
+      <Brand>
+        <h1>Rocketnotes</h1>
+      </Brand>
 
-            <Menu>
-                <li>
-                    <ButtonText  
-                        title="Todos" 
-                        $isactive={tagsSelected.length === 0}
-                        onClick={() => handleTagSelected("all")}
-                        />
-                </li>
-                {
-                    tags && tags.map(tag => (
-                        <li key={String(tag.id)}>
-                            <ButtonText  
-                                title={tag.name} 
-                                onClick={() => handleTagSelected(tag.name)}
-                                $isactive={tagsSelected.includes(tag.name)}//trocando a cor da tag quando selecionada
-                            />
-                        </li>
-                    ))
-                }
-            </Menu>
+      <Header />
 
-            <Search>
-                <Input placeholder="Pesquisar pelo título" />
-            </Search>
+      <Menu>
+        <li>
+          <ButtonText
+            title="Todos"
+            $isactive={tagsSelected.length === 0}
+            onClick={() => handleTagSelected("all")}
+          />
+        </li>
+        {tags &&
+          tags.map((tag) => (
+            <li key={String(tag.id)}>
+              <ButtonText
+                title={tag.name}
+                onClick={() => handleTagSelected(tag.name)}
+                $isactive={tagsSelected.includes(tag.name)} //trocando a cor da tag quando selecionada
+              />
+            </li>
+          ))}
+      </Menu>
 
-            <Content>
-                <Section title= "Minhas notas">
-                    <Note data={{
-                        title: 'React', 
-                        tags: [
-                            {id:'1', name:'react'},
-                            {id:'2', name:'rocketseat'}
-                        ]
-                    }}
-                    />
-                </Section>
-            </Content>
+      <Search>
+        <Input
+          placeholder="Pesquisar pelo título"
+          onchange={() => setSearch(e.target.value)}
+        />
+      </Search>
 
-            <NewNote to="/new">
-                <FiPlus/>
-                Criar nota
-            </NewNote>
-        </Container>
-    );
+      <Content>
+        <Section title="Minhas notas">
+          {notes.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+            />
+          ))}
+        </Section>
+      </Content>
+
+      <NewNote to="/new">
+        <FiPlus />
+        Criar nota
+      </NewNote>
+    </Container>
+  );
 }
