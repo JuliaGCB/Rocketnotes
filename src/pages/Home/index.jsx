@@ -26,7 +26,7 @@ export function Home() {
     } else {
       setTagsSelected((prevState) => [...prevState, tagName]);
     }
-    setTagsSelected((prevState) => [...prevState, tagName]); //Dessa forma consigo selecionar varias tag sem perder a cor delas
+    //Dessa forma consigo selecionar varias tag sem perder a cor delas
   }
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export function Home() {
   }, []);
 
   useEffect(() => {
-      async function fetchNotes() {
+    async function fetchNotes() {
       const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`
       );
       setNotes(response.data);
@@ -60,7 +60,7 @@ export function Home() {
         <li>
           <ButtonText
             title="Todos"
-            $isactive={tagsSelected.length === 0}
+            $isActive={tagsSelected.length === 0}
             onClick={() => handleTagSelected("all")}
           />
         </li>
@@ -70,7 +70,7 @@ export function Home() {
               <ButtonText
                 title={tag.name}
                 onClick={() => handleTagSelected(tag.name)}
-                $isactive={tagsSelected.includes(tag.name)} //trocando a cor da tag quando selecionada
+                $isActive={tagsSelected.includes(tag.name)} //trocando a cor da tag quando selecionada
               />
             </li>
           ))}
@@ -79,7 +79,7 @@ export function Home() {
       <Search>
         <Input
           placeholder="Pesquisar pelo título"
-          onchange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </Search>
 

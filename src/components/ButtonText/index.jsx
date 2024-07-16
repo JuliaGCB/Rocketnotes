@@ -1,13 +1,13 @@
-import { Container} from './style'
+import { Container } from './style'
 
-export function ButtonText({title, isActive = false, ...rest}){
-    return(
-        <Container 
+export function ButtonText({ title, isActive = false, ...rest }) {
+    return (
+        <Container
             type='button'
-            $isactive={isActive.toString()}
+            $isActive={isActive.toString()}
             {...rest}
         >
-            {title} 
+            {title}
         </Container>
     );
 }
