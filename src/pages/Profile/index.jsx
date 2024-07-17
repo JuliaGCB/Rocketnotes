@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FiArrowLeft, FiUser, FiMail, FiLock, FiCamera } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from "../../hooks/auth"
 
@@ -25,8 +25,14 @@ export function Profile(){
     const [avatar, setAvatar] = useState(avatarUrl); //se o user já tiver um avatar
     const [avatarFile, setAvatarFile] = useState(null); //usando o avatarFile para carregar a imagem
 
+    const navigate = useNavigate();
+
+    function handleBack(){ //fazendo ele voltar sem criar camadas
+        navigate(-1);
+    }
+
     async function handleUpdate(){
-        const user ={
+        const updated ={
             name,
             email,
             password: passwordNew,
@@ -34,7 +40,9 @@ export function Profile(){
 
         }
 
-        await updateProfile({user, avatarFile})
+        const userUpdated = Object.assign(user,updated);
+
+        await updateProfile({user: userUpdated, avatarFile})
     }
 
     function handleChangeAvatar(event) { //Fazendo a alteração do avatar
@@ -48,9 +56,9 @@ export function Profile(){
     return(
         <Container>
             <header>
-                <Link to="/">
+                <button type='button' onClick={handleBack}>
                     <FiArrowLeft />
-                </Link>
+                </button>
             </header>
 
             <Form>

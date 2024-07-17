@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FiPlus } from "react-icons/fi";
 
 import { api } from "../../services/api";
@@ -17,16 +18,27 @@ export function Home() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
+  const navigate = useNavigate();
+
   function handleTagSelected(tagName) {
+    if(tagName === "all"){
+      return setTagsSelected([]); // quando clicar em Todos, vai desmarcar todos automaticamente
+    }
+
+
     const alreadySelected = tagsSelected.includes(tagName); //Verificando se o TagName existe na list de tag
 
     if (alreadySelected) {
       const filteredTags = tagsSelected.filter((tag) => tag !== tagName);
       setTagsSelected(filteredTags);
+
     } else {
       setTagsSelected((prevState) => [...prevState, tagName]);
-    }
-    setTagsSelected((prevState) => [...prevState, tagName]); //Dessa forma consigo selecionar varias tag sem perder a cor delas
+    } //Dessa forma consigo selecionar varias tag sem perder a cor delas
+  }
+
+  function handleDetails(id){ // Carregando a nota ao clicar, estamos recuperando o id
+    navigate(`/details/${id}`);
   }
 
   useEffect(() => {
@@ -60,7 +72,7 @@ export function Home() {
         <li>
           <ButtonText
             title="Todos"
-            $isactive={tagsSelected.length === 0}
+            $isActive={tagsSelected.length === 0}
             onClick={() => handleTagSelected("all")}
           />
         </li>
@@ -70,7 +82,7 @@ export function Home() {
               <ButtonText
                 title={tag.name}
                 onClick={() => handleTagSelected(tag.name)}
-                $isactive={tagsSelected.includes(tag.name)} //trocando a cor da tag quando selecionada
+                $isActive={tagsSelected.includes(tag.name)} //trocando a cor da tag quando selecionada
               />
             </li>
           ))}
@@ -79,7 +91,7 @@ export function Home() {
       <Search>
         <Input
           placeholder="Pesquisar pelo título"
-          onchange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)} // fazendo a pesquisa das notas
         />
       </Search>
 
@@ -89,6 +101,7 @@ export function Home() {
             <Note
               key={String(note.id)}
               data={note}
+              onClick={() => handleDetails(note.id)}
             />
           ))}
         </Section>
